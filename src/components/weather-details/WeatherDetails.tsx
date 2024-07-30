@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
-import { LuWind, LuEye, LuDroplet, LuSunrise, LuSunset } from "react-icons/lu";
-import { ImMeter } from "react-icons/im";
+import {LuWind, LuEye, LuDroplet, LuSunrise, LuSunset} from "react-icons/lu";
+import {ImMeter} from "react-icons/im";
 
 export interface WeatherDetailsProps {
     visibility: string;
@@ -11,15 +11,15 @@ export interface WeatherDetailsProps {
     sunset: string;
 }
 
-const WeatherDetails = ({visibility, humidity, windSpeed, airPressure, sunrise, sunset }: WeatherDetailsProps) => {
+const WeatherDetails = ({visibility, humidity, windSpeed, airPressure, sunrise, sunset}: WeatherDetailsProps) => {
     return (
         <>
-         <SingleWeatherDetail information={"Visibilidad"} icon={<LuEye />} value={visibility} />
-         <SingleWeatherDetail information={"Humedad"} icon={<LuDroplet />} value={humidity} />
-         <SingleWeatherDetail information={"Vel. viento"} icon={<LuWind />} value={windSpeed} />
-         <SingleWeatherDetail information={"Presión del aire"} icon={<ImMeter />} value={airPressure} />
-         <SingleWeatherDetail information={"Amanece"} icon={<LuSunrise />} value={sunrise} />
-         <SingleWeatherDetail information={"Atardece"} icon={<LuSunset />} value={sunset} />
+            <SingleWeatherDetail information={"Visibilidad"} icon={<LuEye/>} value={visibility}/>
+            <SingleWeatherDetail information={"Humedad"} icon={<LuDroplet/>} value={humidity}/>
+            <SingleWeatherDetail information={"Vel. viento"} icon={<LuWind/>} value={windSpeed}/>
+            <SingleWeatherDetail information={"Presión del aire"} icon={<ImMeter/>} value={airPressure}/>
+            <SingleWeatherDetail information={"Amanece"} icon={<LuSunrise/>} value={sunrise}/>
+            <SingleWeatherDetail information={"Atardece"} icon={<LuSunset/>} value={sunset}/>
         </>
     );
 };
