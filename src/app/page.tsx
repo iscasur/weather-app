@@ -21,7 +21,7 @@ export default function Home() {
     const [loadingCity, setLoadingCity] = useAtom(loadingCityAtom)
 
     const {isLoading, error, data, refetch} = useQuery<WeatherData>('repoData', async () => {
-            const {data} = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${place.lat}&lon=${place.long}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=30`)
+            const {data} = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${place.lat}&lon=${place.long}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=40`)
             return data
         }
     )
@@ -66,9 +66,9 @@ export default function Home() {
                     <section className={"space-y-4"}>
                         <div className={"space-y-2"}>
                             <h2 className={"flex gap-1 text-2xl items-end"}>
-                                <span>{format(parseISO(firstData?.dt_txt ?? ""), "EEEE")}</span>
+                                <span className={"capitalize"}>{format(parseISO(firstData?.dt_txt ?? ""), "EEEE")}</span>
                                 <span
-                                    className={"text-lg"}>({format(parseISO(firstData?.dt_txt ?? ""), "dd.MM.yyyy")})</span>
+                                    className={"text-lg"}>({format(parseISO(firstData?.dt_txt ?? ""), "dd/MM/yyyy")})</span>
                             </h2>
                             <Container className={"gap-10 px-6 items-center"}>
                                 {/* temperature */}
@@ -76,7 +76,10 @@ export default function Home() {
                                     <span className={"text-5xl"}>
                                         {convertKelvinToCelsius(firstData?.main.temp ?? 0)}º
                                     </span>
-                                    <p className={"text-xs space-x-1 whitespace-nowrap"}>Sensación térmica</p>
+                                    <p className={"text-xs space-x-1 whitespace-nowrap"}>
+                                        <span>Sensación térmica</span>
+                                        <span>{convertKelvinToCelsius(firstData?.main.feels_like ?? 0)}º</span>
+                                    </p>
                                     <p className={"text-xs space-x-2"}>
                                         <span>{convertKelvinToCelsius(firstData?.main.temp_min ?? 0)}º↓ </span>
                                         <span>{convertKelvinToCelsius(firstData?.main.temp_max ?? 0)}º↑ </span>
@@ -85,7 +88,7 @@ export default function Home() {
 
                                 {/* time and weather icon */}
                                 <div className={"flex gap-10 sm:gap-16 overflow-x-auto w-full justify-between pr-3"}>
-                                    {data?.list.map((day, index) => (
+                                    {data?.list.slice(0, 5).map((day, index) => (
                                         <div key={index}
                                              className={"flex flex-col justify-between gap-2 items-center text-xs font-semibold"}>
                                             <p className={"whitespace-nowrap"}>{format(parseISO(day.dt_txt), "h:mm a")}</p>
@@ -98,7 +101,7 @@ export default function Home() {
                         </div>
 
                         <div className={"flex gap-4"}>
-                            <Container className={"w-fit justify-center flex-col px-4 items-center"}>
+                            <Container className={"!w-fit justify-center flex-col px-4 items-center"}>
                                 <p className={"capitalize text-center"}>{firstData?.weather[0].description}</p>
                                 <WeatherIcon iconname={getDayOrNightIcon(firstData?.weather[0].icon ?? "", firstData?.dt_txt ?? "")} />
                             </Container>
@@ -116,15 +119,14 @@ export default function Home() {
                     </section>
 
                     {/*5 days forecast data*/}
-
                     <section className={"flex w-full flex-col gap-4"}>
                         <p className={"text-2xl"}>Pronóstico (5 días)</p>
-                        {firstDataForEachDate.map((date, index) => (
+                        {firstDataForEachDate.slice(1).map((date, index) => (
                             <ForecastWeatherDetail
                                 key={index}
                                 description={date?.weather[0].description ?? ""}
                                 weatherIcon={date?.weather[0].icon ?? ""}
-                                date={format(parseISO(date?.dt_txt ?? ""), "dd.MM")}
+                                date={format(parseISO(date?.dt_txt ?? ""), "dd/MM")}
                                 day={format(parseISO(date?.dt_txt ?? ""), "EEEE")}
                                 feelsLike={date?.main.feels_like ?? 0}
                                 temp={date?.main.temp ?? 0}
@@ -170,7 +172,7 @@ const WeatherSkeleton = () => {
                 </div>
             </div>
 
-            {/* 7 days forecast skeleton */}
+            {/* 5 days forecast skeleton */}
             <div className="flex flex-col gap-4 animate-pulse">
                 <p className="text-2xl h-8 w-36 bg-gray-300 rounded"></p>
 

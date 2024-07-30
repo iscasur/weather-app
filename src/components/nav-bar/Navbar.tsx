@@ -63,7 +63,6 @@ const Navbar = ({location}: NavbarProps) => {
                     <MdWbSunny className={"text-3xl mt-1 text-yellow-500"} />
                 </div>
                 <section className={"flex gap-2 items-center"}>
-                    <MdMyLocation className={"text-2xl text-gray-500 hover:opacity-80 cursor-pointer"} />
                     <MdOutlineLocationOn className={"text-3xl"} />
                     <p className={"text-slate-900/90 text-sm"}>{location}</p>
                     <div className={"relative"}>
