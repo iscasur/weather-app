@@ -2,7 +2,7 @@
 
 import React, {FormEvent, useState} from 'react';
 import {MdWbSunny, MdMyLocation, MdOutlineLocationOn} from "react-icons/md";
-import { SearchBox } from "@/components";
+import {SearchBox} from "@/components";
 import axios from "axios";
 import {Location} from "@/lib/definitions";
 import {useAtom} from "jotai";
@@ -36,7 +36,7 @@ const Navbar = ({location}: NavbarProps) => {
         }
     }
 
-    const handleSubmitSearch = (event:  FormEvent<HTMLFormElement>) => {
+    const handleSubmitSearch = (event: FormEvent<HTMLFormElement>) => {
         setLoadingCity(true)
         event.preventDefault()
 
@@ -48,9 +48,9 @@ const Navbar = ({location}: NavbarProps) => {
             setTimeout(() => {
                 setLoadingCity(false)
                 setPlace({
-                        lat: suggestions[0].lat,
-                        long: suggestions[0].long,
-                    })
+                    lat: suggestions[0].lat,
+                    long: suggestions[0].long,
+                })
             }, 500)
         }
     }
@@ -60,10 +60,10 @@ const Navbar = ({location}: NavbarProps) => {
             <div className={"h-[80px] w-full flex justify-between items-center max-w-7xl px-3 mx-auto"}>
                 <div className={"flex items-center justify-center gap-2"}>
                     <h2 className={"text-gray-500 text-3xl"}>Weather</h2>
-                    <MdWbSunny className={"text-3xl mt-1 text-yellow-500"} />
+                    <MdWbSunny className={"text-3xl mt-1 text-yellow-500"}/>
                 </div>
                 <section className={"flex gap-2 items-center"}>
-                    <MdOutlineLocationOn className={"text-3xl"} />
+                    <MdOutlineLocationOn className={"text-3xl"}/>
                     <p className={"text-slate-900/90 text-sm"}>{location}</p>
                     <div className={"relative"}>
                         <SearchBox

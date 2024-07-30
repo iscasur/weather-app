@@ -19,7 +19,7 @@ const ForecastWeatherDetail = (props: ForecastWeatherDetailProps) => {
         <Container className={"gap-4"}>
             <section className={"flex gap-4 items-center px-4"}>
                 <div className={"flex flex-col gap-1 items-center"}>
-                    <WeatherIcon iconname={props.weatherIcon} />
+                    <WeatherIcon iconname={props.weatherIcon}/>
                     <p>{props.date}</p>
                     <p className={"capitalize text-sm"}>{props.day}</p>
                 </div>
