@@ -1,4 +1,6 @@
-export { default as Navbar } from './navbar'
+export { default as Navbar } from './nav-bar'
 export { default as SearchBox } from './search-box'
 export { default as Container } from './container'
 export { default as WeatherIcon } from './weather-icon'
+export { default as ForecastWeatherDetail } from './forecast-weather-detail'
+export { default as WeatherDetails } from './weather-details'
